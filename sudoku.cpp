@@ -16,11 +16,11 @@ void ilk() {
 
 void point() {
 	int x,y;
-	std::cout<<"\nSatir ve sutun sec(1-9): ";
+	std::cout<<"\n\e[93mSatir ve sutun sec(1-9): ";
 	std::cin>>x>>y;
 
 	int number;
-	std::cout<<"\nSayi sec(1-9): ";
+	std::cout<<"\n\e[93mSayi sec(1-9): ";
 	std::cin>>number;
 	board[x-1][y-1] = number;
 }
@@ -42,7 +42,7 @@ void print() {
 	std::cout<<"\n";
 }
 
-void ctrlColumn() {
+bool ctrlColumn() {
 	int y=0;
         int x=1;
         int z=0;
@@ -53,6 +53,7 @@ void ctrlColumn() {
                                         y++;
                                         if(y>1) {
                                                 std::cout<<"\nhatali.\n";
+						return false;
                                         }
                                 }
                         }
@@ -62,10 +63,11 @@ void ctrlColumn() {
                 z++;
                 x=1;
         }
+	return true;
 }
 
 
-void ctrlRow() {
+bool ctrlRow() {
 	int y=0;
 	int x=1;
 	int z=0;
@@ -76,6 +78,7 @@ void ctrlRow() {
 					y++;
 					if(y>1) {
 						std::cout<<"\nhatali.\n";
+						return false;
 					}
 				}
 			}
@@ -85,6 +88,7 @@ void ctrlRow() {
 		z++;
 		x=1;
 	}
+	return true;
 }
 
 bool ctrlZero() {
@@ -108,7 +112,7 @@ int main() {
 		//system("clear");
 		ctrlRow();
 		ctrlColumn();
-		if(ctrlZero()) {
+		if(ctrlZero() && ctrlRow() && ctrlColumn()) {
 			std::cout<<"\nOyun bitti tebrikler.\n";
 			exit(1);
 		}
