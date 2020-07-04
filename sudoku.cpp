@@ -27,6 +27,10 @@ void point() {
 
 void print() {
 	std::cout<<"\n";
+	for(int i=1;i<10;i++) {
+		std::cout<<"\e[97m"<<i<<" | ";
+	}
+	std::cout<<"\n\n";
 	for(int i=0;i<row;i++) {
 		for(int j=0;j<column;j++) {
 			//board[i][j] = 5;
@@ -37,7 +41,7 @@ void print() {
 				std::cout<<"\e[92m"<<board[i][j]<<"   ";
 			}
 		}
-		std::cout<<"\n\n";
+		std::cout<<"\e[97m= "<<i+1<<"\n\n";
 	}
 	std::cout<<"\n";
 }
