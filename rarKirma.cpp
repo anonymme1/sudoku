@@ -67,18 +67,31 @@ int main() {
 
 		std::ifstream oku(word);
 		std::string satir;
-		while(!oku.eof()) {
-			getline(oku, satir);
-			sprintf(komut, "unrar e -p%s %s", satir.c_str(), dosyaAdi.c_str());
-			int c = system(komut);
-			if(c == EXIT_SUCCESS) {
-				std::cout<<"\n\e[92mSifre bulundu >> "<<satir<<"\n";
-				break;
-			}
+		if(oku.is_open()) {
+			while(!oku.eof()) {
+				getline(oku, satir);
+				if(satir=="") {
+					sprintf(komut, "unrar e -pdeneme %s", dosyaAdi.c_str());
+				}
 
-			else {
-				std::cout<<"\n\e[91mYanlis sifre >> "<<satir<<"\n";
+				sprintf(komut, "unrar e -p%s %s", satir.c_str(), dosyaAdi.c_str());
+				int c = system(komut);
+				if(c == EXIT_SUCCESS) {
+					std::cout<<"\n\e[92mSifre bulundu >> "<<satir<<"\n";
+					break;
+				}
+
+				else {
+					std::cout<<"\n\e[91mYanlis sifre >> "<<satir<<"\n";
+				}
+				if(oku.eof()) {
+					exit(1);
+				}
 			}
+		}
+
+		else {
+			std::cout<<"\nWordlist dosyasi acilamadi.\n";
 		}
 	}
 
